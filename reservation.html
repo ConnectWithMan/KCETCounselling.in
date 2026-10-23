@@ -1473,34 +1473,7 @@
     <!-- =========================================================
          TOP NAVIGATION BAR
          ========================================================= -->
-    <header class="site-nav">
-        <div class="container nav-inner">
-            <a href="/" class="brand-logo" aria-label="KCET Counselling 2027">
-                <div class="brand-text">
-                    <span class="brand-title">KCET Counselling</span>
-                </div>
-            </a>
-
-            <!-- Desktop Nav Menu -->
-            <nav class="nav-menu" aria-label="Main Navigation">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/counselling" class="nav-link">Counselling</a>
-                <a href="/registration" class="nav-link">Registration</a>
-                <a href="/reservation" class="nav-link active">Reservation</a>
-                <a href="#vertical-quotas" class="nav-link">Social Quotas</a>
-                <a href="#horizontal-quotas" class="nav-link">Rural &amp; Kannada</a>
-                <a href="#kalyana-karnataka" class="nav-link">371(J) HK</a>
-                <a href="#snq-scheme" class="nav-link">SNQ Quota</a>
-                <a href="#rd-verification" class="nav-link">RD Number</a>
-                <a href="#category-tool" class="nav-link">Checker Tool</a>
-                <a href="#faqs" class="nav-link">FAQs</a>
-            </nav>
-
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </header>
+    <header class="site-nav" id="common-navbar"></header>
 
     <main id="main-content">
 
@@ -2995,25 +2968,7 @@
     <!-- =========================================================
          SITE FOOTER
          ========================================================= -->
-    <footer class="site-footer">
-        <div class="container">
-            <ul class="footer-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/counselling">KCET Counselling</a></li>
-                <li><a href="/registration">KCET Registration</a></li>
-                <li><a href="/reservation">KCET Reservation</a></li>
-                <li><a href="#vertical-quotas">Social Quotas</a></li>
-                <li><a href="#horizontal-quotas">Rural &amp; Kannada</a></li>
-                <li><a href="#kalyana-karnataka">371(J) HK Quota</a></li>
-                <li><a href="#snq-scheme">SNQ Scheme</a></li>
-                <li><a href="#faqs">FAQs</a></li>
-            </ul>
-
-            <p class="footer-copy">
-                &copy; KCET Counselling 2027. Authoritative Karnataka Examinations Authority (KEA) Admissions Portal. All Rights Reserved.
-            </p>
-        </div>
-    </footer>
+    <footer class="site-footer" id="common-footer"></footer>
 
     <!-- =========================================================
          LIGHTWEIGHT INTERACTIVE JAVASCRIPT
@@ -3029,35 +2984,7 @@
             }
         }
 
-        // Mobile Menu Drawer Toggle
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.querySelector('.nav-menu');
-        if (mobileToggle && navMenu) {
-            mobileToggle.addEventListener('click', function () {
-                navMenu.classList.toggle('active');
-                const icon = mobileToggle.querySelector('i');
-                if (icon) {
-                    if (navMenu.classList.contains('active')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                }
-            });
 
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function () {
-                    navMenu.classList.remove('active');
-                    const icon = mobileToggle.querySelector('i');
-                    if (icon) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                });
-            });
-        }
 
         // Interactive Reservation & Category Code Generator
         function calculateReservation() {
@@ -3292,6 +3219,7 @@
             }
         }
     </script>
+    <script src="common.js"></script>
 </body>
 
 </html>
