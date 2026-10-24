@@ -16,7 +16,8 @@
         counselling: useHtmlExt ? 'counselling.html' : '/counselling',
         registration: useHtmlExt ? 'registration.html' : '/registration',
         reservation: useHtmlExt ? 'reservation.html' : '/reservation',
-        eligibility: useHtmlExt ? 'eligibility.html' : '/eligibility'
+        eligibility: useHtmlExt ? 'eligibility.html' : '/eligibility',
+        documents: useHtmlExt ? 'documents.html' : '/documents'
     };
 
     // 2. Generate Common Navbar Markup
@@ -36,6 +37,7 @@
                     <a href="${urls.registration}" class="nav-link">Registration</a>
                     <a href="${urls.reservation}" class="nav-link">Reservation</a>
                     <a href="${urls.eligibility}" class="nav-link">Eligibility</a>
+                    <a href="${urls.documents}" class="nav-link">Documents Required</a>
                 </nav>
 
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -55,6 +57,7 @@
                     <li><a href="${urls.registration}">KCET Registration</a></li>
                     <li><a href="${urls.reservation}">KCET Reservation</a></li>
                     <li><a href="${urls.eligibility}">KCET Eligibility</a></li>
+                    <li><a href="${urls.documents}">Documents Required</a></li>
                 </ul>
 
                 <p class="footer-copy">
