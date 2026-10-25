@@ -13,6 +13,7 @@
 
     const urls = {
         home: useHtmlExt ? 'index.html' : '/',
+        exam: useHtmlExt ? 'exam.html' : '/exam',
         counselling: useHtmlExt ? 'counselling.html' : '/counselling',
         registration: useHtmlExt ? 'registration.html' : '/registration',
         reservation: useHtmlExt ? 'reservation.html' : '/reservation',
@@ -33,6 +34,7 @@
                 <!-- Desktop & Mobile Navigation Menu (Common across all pages) -->
                 <nav class="nav-menu" aria-label="Main Navigation">
                     <a href="${urls.home}" class="nav-link">Home</a>
+                    <a href="${urls.exam}" class="nav-link">KCET Exam</a>
                     <a href="${urls.counselling}" class="nav-link">Counselling</a>
                     <a href="${urls.registration}" class="nav-link">Registration</a>
                     <a href="${urls.reservation}" class="nav-link">Reservation</a>
@@ -53,6 +55,7 @@
             <div class="container">
                 <ul class="footer-nav">
                     <li><a href="${urls.home}">Home</a></li>
+                    <li><a href="${urls.exam}">KCET Exam 2027</a></li>
                     <li><a href="${urls.counselling}">KCET Counselling</a></li>
                     <li><a href="${urls.registration}">KCET Registration</a></li>
                     <li><a href="${urls.reservation}">KCET Reservation</a></li>
@@ -128,9 +131,11 @@
                 transition: all 0.18s ease;
                 white-space: nowrap;
             }
-            .nav-link:hover {
+            .nav-link:hover,
+            .nav-link.active {
                 color: var(--primary, #1d4ed8);
                 background-color: var(--primary-light, #eff6ff);
+                font-weight: 600;
             }
             .mobile-toggle {
                 display: none;
@@ -269,10 +274,24 @@
         }
         footer.innerHTML = generateFooterHTML();
 
-        // 7c. Attach Interactive Mobile Toggle
+        // 7c. Highlight current active page link
+        try {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            header.querySelectorAll('.nav-link').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === currentPath || (href === 'index.html' && (currentPath === '' || currentPath === '/'))) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        } catch (e) {
+            // fail-safe
+        }
+
+        // 7d. Attach Interactive Mobile Toggle
         initMobileToggle();
 
-        // 7d. Sticky scroll shadow effect
+        // 7e. Sticky scroll shadow effect
         initScrollShadow(header);
     }
 
