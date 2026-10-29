@@ -18,7 +18,11 @@
         registration: useHtmlExt ? 'registration.html' : '/registration',
         reservation: useHtmlExt ? 'reservation.html' : '/reservation',
         eligibility: useHtmlExt ? 'eligibility.html' : '/eligibility',
-        documents: useHtmlExt ? 'documents.html' : '/documents'
+        documents: useHtmlExt ? 'documents.html' : '/documents',
+        about: useHtmlExt ? 'about.html' : '/about',
+        contact: useHtmlExt ? 'contact.html' : '/contact',
+        privacy: useHtmlExt ? 'privacy.html' : '/privacy',
+        terms: useHtmlExt ? 'terms.html' : '/terms'
     };
 
     // 2. Generate Common Navbar Markup
@@ -54,17 +58,14 @@
         return `
             <div class="container">
                 <ul class="footer-nav">
-                    <li><a href="${urls.home}">Home</a></li>
-                    <li><a href="${urls.exam}">KCET Exam 2027</a></li>
-                    <li><a href="${urls.counselling}">KCET Counselling</a></li>
-                    <li><a href="${urls.registration}">KCET Registration</a></li>
-                    <li><a href="${urls.reservation}">KCET Reservation</a></li>
-                    <li><a href="${urls.eligibility}">KCET Eligibility</a></li>
-                    <li><a href="${urls.documents}">Documents Required</a></li>
+                    <li><a href="${urls.about}">About Us</a></li>
+                    <li><a href="${urls.contact}">Contact Us</a></li>
+                    <li><a href="${urls.privacy}">Privacy Policy</a></li>
+                    <li><a href="${urls.terms}">Terms of Service</a></li>
                 </ul>
 
                 <p class="footer-copy">
-                    &copy; KCET Counselling 2027. Authoritative Karnataka Examinations Authority (KEA) Admissions Portal. All Rights Reserved.
+                    &copy; KCET Counselling 2027. All Rights Reserved.
                 </p>
             </div>
         `;
@@ -149,12 +150,12 @@
             }
 
             /* -------------------------------------------------------------
-               SIMPLE COMMON FOOTER STYLES
+               CLEAN & SIMPLE COMMON FOOTER STYLES
                ------------------------------------------------------------- */
             .site-footer {
                 background: #090d16;
                 color: #94a3b8;
-                padding: 3rem 0 2rem 0;
+                padding: 2.75rem 0 2rem 0;
                 border-top: 1px solid rgba(255, 255, 255, 0.08);
                 text-align: center;
             }
@@ -162,11 +163,11 @@
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
-                gap: 1.5rem;
+                gap: 1.25rem 1.75rem;
                 list-style: none;
                 padding: 0;
-                margin: 0 auto 1.5rem auto;
-                max-width: 800px;
+                margin: 0 auto 0.85rem auto;
+                max-width: 900px;
             }
             .footer-nav li {
                 margin: 0;
@@ -180,8 +181,19 @@
             .footer-nav a:hover {
                 color: #ffffff;
             }
-            .footer-copy {
+            .footer-nav-secondary {
+                gap: 1rem 1.5rem;
+                margin-bottom: 1.35rem;
+            }
+            .footer-nav-secondary a {
+                color: #94a3b8;
                 font-size: 0.82rem;
+            }
+            .footer-nav-secondary a:hover {
+                color: #60a5fa;
+            }
+            .footer-copy {
+                font-size: 0.8rem;
                 color: #64748b;
                 margin: 0;
                 line-height: 1.6;
