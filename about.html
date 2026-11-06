@@ -707,6 +707,36 @@
                 font-size: 1.7rem;
             }
         }
+
+        @media (max-width: 520px) {
+            .btn-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-group .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.75rem;
+            }
+
+            .cta-box {
+                padding: 2rem 1.15rem;
+            }
+
+            .cta-box h2 {
+                font-size: 1.45rem;
+            }
+        }
     </style>
 </head>
 
@@ -732,9 +762,6 @@
             <div class="container">
                 <div class="hero-grid">
                     <div>
-                        <span class="hero-badge">
-                            <i class="fas fa-compass"></i> Independent Student Advisory Initiative
-                        </span>
                         <h1 class="hero-title">
                             Empowering Karnataka Aspirants with <span>Transparent Admissions</span> Guidance
                         </h1>
@@ -873,7 +900,6 @@
         <section class="section section-alt">
             <div class="container">
                 <div class="section-header">
-                    <span class="hero-badge"><i class="fas fa-cubes"></i> Core Advisory Pillars</span>
                     <h2 class="section-title">What We Offer to Karnataka Aspirants</h2>
                     <p class="section-subtitle">
                         Comprehensive, data-driven resources covering every milestone of the Karnataka UGCET admission
@@ -891,7 +917,7 @@
                             Interactive rank predictor mapping candidate ranks against past closing ranks across Round
                             1, Round 2, and Extended rounds for 220+ Karnataka engineering colleges.
                         </p>
-                        <a href="/#cutoffs" class="pillar-link">
+                        <a href="cutoff.html" class="pillar-link">
                             Explore Cutoffs <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -973,7 +999,6 @@
         <section class="section">
             <div class="container">
                 <div class="section-header">
-                    <span class="hero-badge"><i class="fas fa-award"></i> Editorial Standards</span>
                     <h2 class="section-title">Our Core Editorial Principles</h2>
                     <p class="section-subtitle">
                         Integrity, impartiality, and verified data are the foundation of everything published on our

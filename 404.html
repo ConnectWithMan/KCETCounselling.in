@@ -391,6 +391,32 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 520px) {
+            .btn-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn-group .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .error-code {
+                font-size: 3.75rem;
+            }
+
+            .error-title {
+                font-size: 1.45rem;
+            }
+        }
     </style>
 </head>
 
@@ -437,12 +463,12 @@
                 </div>
 
                 <div class="grid-3">
-                    <a href="/#cutoffs" class="resource-card">
+                    <a href="cutoff.html" class="resource-card">
                         <div class="card-icon icon-blue">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <h3 class="card-title">
-                            Cutoff Predictor &amp; Colleges
+                            KCET Cutoffs &amp; Closing Ranks
                             <i class="fas fa-arrow-right arrow"></i>
                         </h3>
                         <p class="card-desc">

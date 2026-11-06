@@ -608,11 +608,30 @@
 
         @media (max-width: 600px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 1.85rem;
             }
 
             .contact-card {
-                padding: 1.75rem 1.25rem;
+                padding: 1.5rem 1.15rem;
+            }
+
+            .card-details a {
+                word-break: break-all;
+            }
+
+            .card-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 1.65rem;
             }
         }
     </style>
@@ -638,9 +657,6 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <span class="hero-badge">
-                    <i class="fas fa-headset"></i> Student Guidance &amp; Advisory Helpdesk
-                </span>
                 <h1 class="hero-title">
                     Contact &amp; <span>Support Desk</span>
                 </h1>
@@ -772,7 +788,6 @@
         <section class="section section-alt">
             <div class="container">
                 <div class="section-header">
-                    <span class="hero-badge"><i class="fas fa-question-circle"></i> Quick Solutions</span>
                     <h2 class="section-title">Frequently Asked Questions</h2>
                     <p class="section-subtitle">
                         Find instant answers to common questions about Karnataka UGCET admissions:

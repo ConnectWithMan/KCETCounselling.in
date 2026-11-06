@@ -13,6 +13,7 @@
 
     const urls = {
         home: useHtmlExt ? 'index.html' : '/',
+        cutoff: useHtmlExt ? 'cutoff.html' : '/cutoff',
         exam: useHtmlExt ? 'exam.html' : '/exam',
         counselling: useHtmlExt ? 'counselling.html' : '/counselling',
         registration: useHtmlExt ? 'registration.html' : '/registration',
@@ -38,6 +39,7 @@
                 <!-- Desktop & Mobile Navigation Menu (Common across all pages) -->
                 <nav class="nav-menu" aria-label="Main Navigation">
                     <a href="${urls.home}" class="nav-link">Home</a>
+                    <a href="${urls.cutoff}" class="nav-link">Cutoff</a>
                     <a href="${urls.exam}" class="nav-link">KCET Exam</a>
                     <a href="${urls.counselling}" class="nav-link">Counselling</a>
                     <a href="${urls.registration}" class="nav-link">Registration</a>
@@ -252,6 +254,14 @@
                 }
                 .footer-copy {
                     font-size: 0.78rem;
+                }
+            }
+            @media (max-width: 420px) {
+                .brand-title {
+                    font-size: 1.1rem;
+                }
+                .footer-nav {
+                    gap: 0.5rem 0.85rem;
                 }
             }
         `;
