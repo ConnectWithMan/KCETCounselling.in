@@ -8,11 +8,13 @@
 
     // 1. Determine environment & URL resolution
     const isFileProtocol = window.location.protocol === 'file:';
+    const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const isHtmlExtension = window.location.pathname.endsWith('.html');
-    const useHtmlExt = isFileProtocol || isHtmlExtension;
+    const useHtmlExt = isFileProtocol || isLocalHost || isHtmlExtension;
 
     const urls = {
         home: useHtmlExt ? 'index.html' : '/',
+        predictor: useHtmlExt ? 'college-predictor.html' : '/college-predictor',
         cutoff: useHtmlExt ? 'cutoff.html' : '/cutoff',
         exam: useHtmlExt ? 'exam.html' : '/exam',
         counselling: useHtmlExt ? 'counselling.html' : '/counselling',
@@ -36,16 +38,60 @@
                     </div>
                 </a>
 
-                <!-- Desktop & Mobile Navigation Menu (Common across all pages) -->
-                <nav class="nav-menu" aria-label="Main Navigation">
+                <!-- Desktop & Mobile Navigation Menu with Organized Dropdowns -->
+                <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
                     <a href="${urls.home}" class="nav-link">Home</a>
                     <a href="${urls.cutoff}" class="nav-link">Cutoff</a>
-                    <a href="${urls.exam}" class="nav-link">KCET Exam</a>
-                    <a href="${urls.counselling}" class="nav-link">Counselling</a>
-                    <a href="${urls.registration}" class="nav-link">Registration</a>
-                    <a href="${urls.reservation}" class="nav-link">Reservation</a>
-                    <a href="${urls.eligibility}" class="nav-link">Eligibility</a>
-                    <a href="${urls.documents}" class="nav-link">Documents Required</a>
+
+                    <!-- Dropdown 1: Counselling -->
+                    <div class="nav-item-dropdown">
+                        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                            <span>Counselling</span>
+                            <i class="fas fa-chevron-down nav-chevron"></i>
+                        </button>
+                        <div class="nav-dropdown-menu" role="menu">
+                            <a href="${urls.counselling}" class="dropdown-link" role="menuitem">
+                                <div class="dropdown-icon-box"><i class="fas fa-arrows-split-up-and-left"></i></div>
+                                <span class="dropdown-title">KEA Counselling</span>
+                            </a>
+                            <a href="${urls.registration}" class="dropdown-link" role="menuitem">
+                                <div class="dropdown-icon-box"><i class="fas fa-clipboard-check"></i></div>
+                                <span class="dropdown-title">Registration Guide</span>
+                            </a>
+                            <a href="${urls.documents}" class="dropdown-link" role="menuitem">
+                                <div class="dropdown-icon-box"><i class="fas fa-file-shield"></i></div>
+                                <span class="dropdown-title">Documents Required</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown 2: Eligibility & Quotas -->
+                    <div class="nav-item-dropdown">
+                        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                            <span>Eligibility & Quotas</span>
+                            <i class="fas fa-chevron-down nav-chevron"></i>
+                        </button>
+                        <div class="nav-dropdown-menu" role="menu">
+                            <a href="${urls.eligibility}" class="dropdown-link" role="menuitem">
+                                <div class="dropdown-icon-box"><i class="fas fa-user-check"></i></div>
+                                <span class="dropdown-title">Eligibility Criteria</span>
+                            </a>
+                            <a href="${urls.reservation}" class="dropdown-link" role="menuitem">
+                                <div class="dropdown-icon-box"><i class="fas fa-id-card-clip"></i></div>
+                                <span class="dropdown-title">Reservation & 371(J)</span>
+                            </a>
+                            <a href="${urls.exam}" class="dropdown-link" role="menuitem">
+                                <div class="dropdown-icon-box"><i class="fas fa-graduation-cap"></i></div>
+                                <span class="dropdown-title">KCET Exam Pattern</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Highlighted Predictor Tool CTA -->
+                    <a href="${urls.predictor}" class="nav-btn-predictor">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        <span>College Predictor</span>
+                    </a>
                 </nav>
 
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -86,6 +132,7 @@
                 position: sticky;
                 top: 0;
                 z-index: 1000;
+                width: 100%;
                 background: rgba(255, 255, 255, 0.94);
                 backdrop-filter: blur(16px);
                 -webkit-backdrop-filter: blur(16px);
@@ -119,7 +166,7 @@
             .nav-menu {
                 display: flex;
                 align-items: center;
-                gap: 0.5rem;
+                gap: 0.4rem;
                 list-style: none;
                 margin: 0;
                 padding: 0;
@@ -129,7 +176,7 @@
                 font-weight: 500;
                 color: var(--slate-text-body, #334155);
                 text-decoration: none;
-                padding: 0.45rem 0.85rem;
+                padding: 0.45rem 0.8rem;
                 border-radius: var(--radius-xs, 6px);
                 transition: all 0.18s ease;
                 white-space: nowrap;
@@ -140,6 +187,159 @@
                 background-color: var(--primary-light, #eff6ff);
                 font-weight: 600;
             }
+
+            /* Dropdown Container */
+            .nav-item-dropdown {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+            }
+            .nav-dropdown-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                font-size: 0.9rem;
+                font-weight: 500;
+                color: var(--slate-text-body, #334155);
+                background: none;
+                border: none;
+                padding: 0.45rem 0.8rem;
+                border-radius: var(--radius-xs, 6px);
+                cursor: pointer;
+                transition: all 0.18s ease;
+                font-family: inherit;
+                white-space: nowrap;
+            }
+            .nav-dropdown-toggle:hover,
+            .nav-dropdown-toggle.active,
+            .nav-item-dropdown.is-open .nav-dropdown-toggle {
+                color: var(--primary, #1d4ed8);
+                background-color: var(--primary-light, #eff6ff);
+                font-weight: 600;
+            }
+            .nav-chevron {
+                font-size: 0.72rem;
+                transition: transform 0.22s ease;
+                opacity: 0.75;
+            }
+            .nav-item-dropdown:hover .nav-chevron,
+            .nav-item-dropdown.is-open .nav-chevron {
+                transform: rotate(180deg);
+                opacity: 1;
+            }
+
+            /* Dropdown Menu Box */
+            .nav-dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                margin-top: 0.4rem;
+                min-width: 220px;
+                background: #ffffff;
+                border: 1px solid var(--slate-border, #e2e8f0);
+                border-radius: 10px;
+                box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+                padding: 0.4rem;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(8px);
+                pointer-events: none;
+                transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease;
+                z-index: 1050;
+            }
+            /* Hover Bridge */
+            .nav-dropdown-menu::before {
+                content: '';
+                position: absolute;
+                top: -10px;
+                left: 0;
+                right: 0;
+                height: 10px;
+            }
+
+            @media (min-width: 901px) {
+                .nav-item-dropdown:hover .nav-dropdown-menu,
+                .nav-item-dropdown:focus-within .nav-dropdown-menu,
+                .nav-item-dropdown.is-open .nav-dropdown-menu {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    pointer-events: auto;
+                }
+            }
+
+            /* Dropdown Links */
+            .dropdown-link {
+                display: flex;
+                align-items: center;
+                gap: 0.65rem;
+                padding: 0.5rem 0.75rem;
+                border-radius: 6px;
+                color: var(--slate-text-body, #334155);
+                text-decoration: none;
+                transition: all 0.18s ease;
+            }
+            .dropdown-link:hover,
+            .dropdown-link.active {
+                background: var(--primary-light, #eff6ff);
+                color: var(--primary, #1d4ed8);
+            }
+            .dropdown-icon-box {
+                width: 28px;
+                height: 28px;
+                border-radius: 6px;
+                background: #f1f5f9;
+                color: var(--primary, #1d4ed8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.85rem;
+                flex-shrink: 0;
+                transition: all 0.18s ease;
+            }
+            .dropdown-link:hover .dropdown-icon-box,
+            .dropdown-link.active .dropdown-icon-box {
+                background: #ffffff;
+                color: var(--primary, #1d4ed8);
+                box-shadow: 0 2px 5px rgba(29, 78, 216, 0.18);
+            }
+            .dropdown-title {
+                font-size: 0.88rem;
+                font-weight: 500;
+                color: var(--navy-dark, #0f172a);
+                line-height: 1.25;
+            }
+            .dropdown-link:hover .dropdown-title,
+            .dropdown-link.active .dropdown-title {
+                color: var(--primary, #1d4ed8);
+                font-weight: 600;
+            }
+
+            /* Action Button / Predictor CTA in Navbar */
+            .nav-btn-predictor {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.45rem;
+                background: linear-gradient(135deg, var(--primary, #1d4ed8) 0%, #2563eb 100%);
+                color: #ffffff !important;
+                font-size: 0.88rem;
+                font-weight: 600;
+                padding: 0.48rem 0.95rem;
+                border-radius: 8px;
+                text-decoration: none;
+                box-shadow: 0 2px 8px rgba(29, 78, 216, 0.25);
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                margin-left: 0.35rem;
+            }
+            .nav-btn-predictor:hover,
+            .nav-btn-predictor.active {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(29, 78, 216, 0.35);
+                background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+                color: #ffffff !important;
+            }
+
             .mobile-toggle {
                 display: none;
                 background: none;
@@ -183,17 +383,6 @@
             .footer-nav a:hover {
                 color: #ffffff;
             }
-            .footer-nav-secondary {
-                gap: 1rem 1.5rem;
-                margin-bottom: 1.35rem;
-            }
-            .footer-nav-secondary a {
-                color: #94a3b8;
-                font-size: 0.82rem;
-            }
-            .footer-nav-secondary a:hover {
-                color: #60a5fa;
-            }
             .footer-copy {
                 font-size: 0.8rem;
                 color: #64748b;
@@ -202,9 +391,9 @@
             }
 
             /* -------------------------------------------------------------
-               RESPONSIVE BREAKPOINTS FOR COMMON NAVBAR & FOOTER
+               RESPONSIVE BREAKPOINTS (MOBILE & TABLET NAVBAR)
                ------------------------------------------------------------- */
-            @media (max-width: 820px) {
+            @media (max-width: 900px) {
                 .nav-inner {
                     height: 64px;
                 }
@@ -225,11 +414,11 @@
                     right: 0;
                     background: #ffffff;
                     flex-direction: column;
-                    padding: 1.25rem;
+                    padding: 1rem 1.15rem 1.5rem 1.15rem;
                     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
                     border-bottom: 1px solid var(--slate-border, #e2e8f0);
                     align-items: stretch;
-                    gap: 0.4rem;
+                    gap: 0.35rem;
                     max-height: calc(100vh - 64px);
                     overflow-y: auto;
                     -webkit-overflow-scrolling: touch;
@@ -241,7 +430,45 @@
                     display: block;
                     width: 100%;
                     padding: 0.65rem 0.85rem;
-                    font-size: 0.92rem;
+                    font-size: 0.95rem;
+                }
+                .nav-item-dropdown {
+                    width: 100%;
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                .nav-dropdown-toggle {
+                    width: 100%;
+                    justify-content: space-between;
+                    padding: 0.65rem 0.85rem;
+                    font-size: 0.95rem;
+                }
+                .nav-dropdown-menu {
+                    position: static;
+                    opacity: 1;
+                    visibility: visible;
+                    transform: none;
+                    pointer-events: auto;
+                    box-shadow: none;
+                    border: 1px solid var(--slate-border, #e2e8f0);
+                    background: #f8fafc;
+                    border-radius: 8px;
+                    padding: 0.35rem;
+                    margin: 0.25rem 0 0.5rem 0;
+                    display: none;
+                }
+                .nav-item-dropdown.is-open .nav-dropdown-menu {
+                    display: block;
+                }
+                .dropdown-link {
+                    padding: 0.55rem 0.65rem;
+                }
+                .nav-btn-predictor {
+                    margin: 0.6rem 0 0.2rem 0;
+                    width: 100%;
+                    justify-content: center;
+                    padding: 0.65rem 1rem;
+                    font-size: 0.95rem;
                 }
                 .site-footer {
                     padding: 2.2rem 1rem 1.8rem 1rem;
@@ -258,7 +485,7 @@
             }
             @media (max-width: 420px) {
                 .brand-title {
-                    font-size: 1.1rem;
+                    font-size: 1.15rem;
                 }
                 .footer-nav {
                     gap: 0.5rem 0.85rem;
@@ -268,11 +495,11 @@
         document.head.appendChild(style);
     }
 
-    // 7. Initialize Navbar & Footer in the DOM
+    // 5. Initialize Navbar & Footer in the DOM
     function initNavbarAndFooter() {
         injectCommonStyles();
 
-        // 7a. Inject or populate Navbar
+        // 5a. Inject or populate Navbar
         let header = document.querySelector('header.site-nav') ||
             document.getElementById('site-header') ||
             document.getElementById('common-navbar');
@@ -284,7 +511,7 @@
         }
         header.innerHTML = generateNavbarHTML();
 
-        // 7b. Inject or populate Footer
+        // 5b. Inject or populate Footer
         let footer = document.querySelector('footer.site-footer') ||
             document.getElementById('site-footer') ||
             document.getElementById('common-footer');
@@ -296,31 +523,92 @@
         }
         footer.innerHTML = generateFooterHTML();
 
-        // 7c. Highlight current active page link
+        // 5c. Highlight current active page link & its parent dropdown
         try {
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-            header.querySelectorAll('.nav-link').forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPath || (href === 'index.html' && (currentPath === '' || currentPath === '/'))) {
+            const cleanCurrent = window.location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
+            header.querySelectorAll('.nav-link, .dropdown-link, .nav-btn-predictor').forEach(link => {
+                const href = link.getAttribute('href') || '';
+                const cleanHref = href.replace(/^\//, '').replace(/\.html$/, '') || 'index';
+                if (cleanHref === cleanCurrent) {
                     link.classList.add('active');
                     link.setAttribute('aria-current', 'page');
+                    const parentDropdown = link.closest('.nav-item-dropdown');
+                    if (parentDropdown) {
+                        const toggle = parentDropdown.querySelector('.nav-dropdown-toggle');
+                        if (toggle) toggle.classList.add('active');
+                    }
                 }
             });
         } catch (e) {
             // fail-safe
         }
 
-        // 7d. Attach Interactive Mobile Toggle
+        // 5d. Attach Interactive Dropdowns & Mobile Toggle
+        initDropdowns();
         initMobileToggle();
 
-        // 7e. Sticky scroll shadow effect
+        // 5e. Sticky scroll shadow effect
         initScrollShadow(header);
     }
 
-    // 8. Mobile Toggle Handler
+    // 6. Interactive Dropdowns Handler (Desktop Click/Touch & Mobile Accordion)
+    function initDropdowns() {
+        const dropdownItems = document.querySelectorAll('.nav-item-dropdown');
+
+        dropdownItems.forEach(item => {
+            const toggle = item.querySelector('.nav-dropdown-toggle');
+            if (!toggle) return;
+
+            toggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isOpen = item.classList.contains('is-open');
+
+                // Close other dropdowns
+                dropdownItems.forEach(other => {
+                    if (other !== item) {
+                        other.classList.remove('is-open');
+                        const otherToggle = other.querySelector('.nav-dropdown-toggle');
+                        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                if (isOpen) {
+                    item.classList.remove('is-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    item.classList.add('is-open');
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // Close dropdowns on outside click
+        document.addEventListener('click', function (e) {
+            dropdownItems.forEach(item => {
+                if (!item.contains(e.target)) {
+                    item.classList.remove('is-open');
+                    const toggle = item.querySelector('.nav-dropdown-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Close dropdowns on escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                dropdownItems.forEach(item => {
+                    item.classList.remove('is-open');
+                    const toggle = item.querySelector('.nav-dropdown-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+    }
+
+    // 7. Mobile Toggle Handler
     function initMobileToggle() {
         const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.querySelector('.nav-menu');
+        const navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu');
         if (!mobileToggle || !navMenu) return;
 
         mobileToggle.addEventListener('click', function (e) {
@@ -333,13 +621,18 @@
             mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
-        // Close on link click
-        document.querySelectorAll('.nav-link').forEach(link => {
+        // Close menu when a navigation item is clicked
+        navMenu.querySelectorAll('.nav-link, .dropdown-link, .nav-btn-predictor').forEach(link => {
             link.addEventListener('click', function () {
                 navMenu.classList.remove('active');
                 const icon = mobileToggle.querySelector('i');
                 if (icon) icon.className = 'fas fa-bars';
                 mobileToggle.setAttribute('aria-expanded', 'false');
+
+                // Close any open dropdowns
+                document.querySelectorAll('.nav-item-dropdown').forEach(item => {
+                    item.classList.remove('is-open');
+                });
             });
         });
 
@@ -364,7 +657,7 @@
         });
     }
 
-    // 9. Sticky Header Shadow on Scroll
+    // 8. Sticky Header Shadow on Scroll
     function initScrollShadow(header) {
         window.addEventListener('scroll', function () {
             if (window.scrollY > 15) {
@@ -375,7 +668,7 @@
         }, { passive: true });
     }
 
-    // 10. Global FAQ Accordion Toggle Helper (available for all pages)
+    // 9. Global FAQ Accordion Toggle Helper (available for all pages)
     window.toggleFaq = function (button) {
         const item = button.parentElement;
         const isActive = item.classList.contains('active');
@@ -385,7 +678,7 @@
         }
     };
 
-    // 11. Run on DOM Ready
+    // 10. Run on DOM Ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initNavbarAndFooter);
     } else {

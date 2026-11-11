@@ -39,24 +39,31 @@
     <meta name="twitter:image" content="https://kcetcounselling.in/kcet-counselling.webp" />
 
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9442624129006226" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9442624129006226"
+        crossorigin="anonymous"></script>
 
     <!-- OneSignal SDK -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
-        OneSignalDeferred.push(async function(OneSignal) {
-            await OneSignal.init({
-                appId: "33917cba-7bc3-4261-a130-38e84898ec88",
+        if (window.location.hostname && window.location.hostname.includes('kcetcounselling.in')) {
+            OneSignalDeferred.push(async function (OneSignal) {
+                try {
+                    await OneSignal.init({
+                        appId: "33917cba-7bc3-4261-a130-38e84898ec88",
+                    });
+                } catch (e) {
+                    // Ignore initialization warning
+                }
             });
-        });
+        }
     </script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-99DHVECGMS"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-99DHVECGMS');
     </script>
@@ -1572,6 +1579,152 @@
                 font-size: 0.82rem;
             }
         }
+
+        /* -------------------------------------------------------------
+           INTER-LINKING CTA & GUIDANCE HUB STYLES
+           ------------------------------------------------------------- */
+        .section-cta-wrap {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2.25rem;
+        }
+
+        .section-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.4rem;
+            background: #ffffff;
+            border: 1px solid var(--slate-border);
+            border-radius: var(--radius-sm);
+            color: var(--navy-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-xs);
+            transition: var(--transition);
+        }
+
+        .section-link-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-2px);
+        }
+
+        .section-link-btn.btn-accent {
+            background: var(--primary);
+            color: #ffffff !important;
+            border-color: var(--primary);
+        }
+
+        .section-link-btn.btn-accent:hover {
+            background: var(--primary-hover, #1e40af);
+            color: #ffffff !important;
+        }
+
+        .card-inline-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            margin-top: 0.65rem;
+            transition: var(--transition);
+        }
+
+        .card-inline-link:hover {
+            color: var(--primary-hover, #1e40af);
+            text-decoration: underline;
+        }
+
+        .resources-hub-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .resource-hub-card {
+            background: #ffffff;
+            border: 1px solid var(--slate-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 1.25rem;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-xs);
+            transition: var(--transition);
+        }
+
+        .resource-hub-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-card);
+        }
+
+        .resource-hub-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .resource-hub-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--navy-dark);
+            margin-bottom: 0.35rem;
+            line-height: 1.3;
+        }
+
+        .resource-hub-desc {
+            font-size: 0.82rem;
+            color: var(--slate-text-muted);
+            line-height: 1.55;
+            margin-bottom: 0.75rem;
+            flex-grow: 1;
+        }
+
+        .resource-hub-arrow {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        @media (max-width: 992px) {
+            .resources-hub-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .resources-hub-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-cta-wrap {
+                flex-direction: column;
+            }
+
+            .section-link-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
@@ -1731,6 +1884,15 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="section-cta-wrap">
+                    <a href="registration.html" class="section-link-btn">
+                        <i class="fas fa-clipboard-check"></i> KEA Online Application & Registration Walkthrough &rarr;
+                    </a>
+                    <a href="exam.html" class="section-link-btn">
+                        <i class="fas fa-graduation-cap"></i> KCET Exam Pattern, OMR & Marking Scheme &rarr;
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -1833,6 +1995,16 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="section-cta-wrap">
+                    <a href="exam.html" class="section-link-btn">
+                        <i class="fas fa-graduation-cap"></i> Detailed KCET PCM Syllabus & Weightage &rarr;
+                    </a>
+                    <a href="college-predictor.html" class="section-link-btn btn-accent">
+                        <i class="fas fa-wand-magic-sparkles"></i> Predict Colleges by Merit Rank in Predictor 2027
+                        &rarr;
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -1911,6 +2083,15 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="section-cta-wrap">
+                    <a href="eligibility.html" class="section-link-btn">
+                        <i class="fas fa-user-check"></i> Full Statutory Eligibility Guide (Clauses A to O) &rarr;
+                    </a>
+                    <a href="documents.html" class="section-link-btn">
+                        <i class="fas fa-file-shield"></i> Download BEO Verification Formats & Checklist &rarr;
+                    </a>
                 </div>
             </div>
         </section>
@@ -1993,6 +2174,16 @@
                             engineering counselling. Seat is released to pool.
                         </div>
                     </div>
+                </div>
+
+                <div class="section-cta-wrap">
+                    <a href="counselling.html" class="section-link-btn">
+                        <i class="fas fa-arrows-split-up-and-left"></i> Step-by-Step Option Entry & Counselling Guide
+                        &rarr;
+                    </a>
+                    <a href="college-predictor.html" class="section-link-btn btn-accent">
+                        <i class="fas fa-wand-magic-sparkles"></i> Simulate Choice 1-4 in College Predictor 2027 &rarr;
+                    </a>
                 </div>
             </div>
         </section>
@@ -2080,6 +2271,15 @@
                             </p>
                         </div>
                     </div>
+                </div>
+
+                <div class="section-cta-wrap">
+                    <a href="reservation.html" class="section-link-btn">
+                        <i class="fas fa-id-card-clip"></i> Full Karnataka Reservation Matrix & 371(J) Details &rarr;
+                    </a>
+                    <a href="documents.html" class="section-link-btn">
+                        <i class="fas fa-file-invoice"></i> Caste, Income & SNQ Certificate Formats &rarr;
+                    </a>
                 </div>
             </div>
         </section>
@@ -2188,6 +2388,15 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="section-cta-wrap">
+                    <a href="registration.html" class="section-link-btn">
+                        <i class="fas fa-clipboard-check"></i> Application Deadlines & Registration Process &rarr;
+                    </a>
+                    <a href="counselling.html" class="section-link-btn">
+                        <i class="fas fa-calendar-check"></i> Mock & Real Round Counselling Calendar &rarr;
+                    </a>
                 </div>
             </div>
         </section>
@@ -2317,6 +2526,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="section-cta-wrap">
+                    <a href="counselling.html" class="section-link-btn">
+                        <i class="fas fa-arrows-split-up-and-left"></i> Full Counselling & Option Entry Walkthrough
+                        &rarr;
+                    </a>
+                    <a href="college-predictor.html" class="section-link-btn btn-accent">
+                        <i class="fas fa-wand-magic-sparkles"></i> Build Your 3-Tier Option Entry List &rarr;
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -2331,9 +2550,15 @@
                         Historical KCET closing ranks for Karnataka's premier autonomous and government engineering
                         institutions across CSE, ISE, AI-ML, and ECE disciplines.
                     </p>
-                    <div style="margin-top: 1.25rem;">
-                        <a href="cutoff.html" class="btn btn-primary" style="background:var(--primary); color:#ffffff; font-weight:600; padding:0.65rem 1.4rem;">
-                            <i class="fas fa-chart-line"></i> Open Detailed KCET 2027 Cutoff Guide &amp; Predictor &rarr;
+                    <div
+                        style="margin-top: 1.25rem; display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="college-predictor.html" class="btn btn-primary"
+                            style="background:var(--primary); color:#ffffff; font-weight:600; padding:0.65rem 1.4rem;">
+                            <i class="fas fa-wand-magic-sparkles"></i> KCET College Predictor 2027 &rarr;
+                        </a>
+                        <a href="cutoff.html" class="btn btn-secondary"
+                            style="font-weight:600; padding:0.65rem 1.4rem;">
+                            <i class="fas fa-chart-line"></i> View Cutoff Matrix &rarr;
                         </a>
                     </div>
                 </div>
@@ -2377,8 +2602,7 @@
                                         (ECE)</span><span class="cutoff-val">GM: ~1,250</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View RVCE Cutoffs &rarr;
                         </a>
                     </div>
@@ -2406,8 +2630,7 @@
                                         (ECE)</span><span class="cutoff-val">GM: ~3,100</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View BMSCE Cutoffs &rarr;
                         </a>
                     </div>
@@ -2435,8 +2658,7 @@
                                         (ECE)</span><span class="cutoff-val">GM: ~3,850</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View MSRIT Cutoffs &rarr;
                         </a>
                     </div>
@@ -2464,8 +2686,7 @@
                                         (EEE)</span><span class="cutoff-val">GM: ~6,200</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View PES Cutoffs &rarr;
                         </a>
                     </div>
@@ -2494,8 +2715,7 @@
                                         (ECE)</span><span class="cutoff-val">GM: ~5,500</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View UVCE Cutoffs &rarr;
                         </a>
                     </div>
@@ -2524,8 +2744,7 @@
                                         (ECE)</span><span class="cutoff-val">GM: ~8,900</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View DSCE Cutoffs &rarr;
                         </a>
                     </div>
@@ -2553,8 +2772,7 @@
                                         (ECE)</span><span class="cutoff-val">GM: ~9,800</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View NIE Cutoffs &rarr;
                         </a>
                     </div>
@@ -2583,8 +2801,7 @@
                                         (ECE)</span><span class="cutoff-val">GM: ~7,400</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View SJCE Cutoffs &rarr;
                         </a>
                     </div>
@@ -2612,8 +2829,7 @@
                                         (ECE)</span><span class="cutoff-val">GM: ~11,200</span></div>
                             </div>
                         </div>
-                        <a href="cutoff.html"
-                            class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
+                        <a href="cutoff.html" class="btn btn-secondary" style="width: 100%; margin-top: 0.75rem;">
                             View BIT Cutoffs &rarr;
                         </a>
                     </div>
@@ -2691,6 +2907,96 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="section-cta-wrap">
+                    <a href="documents.html" class="section-link-btn">
+                        <i class="fas fa-file-shield"></i> Complete Verification Documents Checklist & Formats &rarr;
+                    </a>
+                    <a href="registration.html" class="section-link-btn">
+                        <i class="fas fa-clipboard-check"></i> KEA Online Application & Registration Walkthrough &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             SECTION: RELATED GUIDANCE RESOURCES HUB
+             ========================================================= -->
+        <section class="section section-alt" id="guidance-hub">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Explore KCET 2027 Portals & Counselling Guides</h2>
+                    <p class="section-subtitle">
+                        Navigate through all official chapters, cutoff databases, eligibility clauses, and interactive
+                        prediction tools.
+                    </p>
+                </div>
+
+                <div class="resources-hub-grid">
+                    <a href="college-predictor.html" class="resource-hub-card">
+                        <div class="resource-hub-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                        <div class="resource-hub-title">College Predictor 2027</div>
+                        <div class="resource-hub-desc">Calculate admission chances in RVCE, BMSCE & 220+ colleges based
+                            on your merit rank & category.</div>
+                        <div class="resource-hub-arrow">Predict Colleges &rarr;</div>
+                    </a>
+
+                    <a href="cutoff.html" class="resource-hub-card">
+                        <div class="resource-hub-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="resource-hub-title">Cutoff Matrix Repository</div>
+                        <div class="resource-hub-desc">Round-wise opening and closing cutoffs across CSE, AIML, ECE,
+                            Mechanical for all state institutions.</div>
+                        <div class="resource-hub-arrow">Search Cutoffs &rarr;</div>
+                    </a>
+
+                    <a href="counselling.html" class="resource-hub-card">
+                        <div class="resource-hub-icon"><i class="fas fa-list-ol"></i></div>
+                        <div class="resource-hub-title">Counselling & Option Entry</div>
+                        <div class="resource-hub-desc">Complete walkthrough of web option entry, mock allotment results,
+                            and Choice 1, 2, 3 & 4 rules.</div>
+                        <div class="resource-hub-arrow">Counselling Guide &rarr;</div>
+                    </a>
+
+                    <a href="documents.html" class="resource-hub-card">
+                        <div class="resource-hub-icon"><i class="fas fa-folder-open"></i></div>
+                        <div class="resource-hub-title">Document Verification</div>
+                        <div class="resource-hub-desc">Form 1 & 2 formats, 7-year study certificates, BEO verification
+                            counters, and Nadakacheri RD validation.</div>
+                        <div class="resource-hub-arrow">View Documents &rarr;</div>
+                    </a>
+
+                    <a href="reservation.html" class="resource-hub-card">
+                        <div class="resource-hub-icon"><i class="fas fa-id-card-clip"></i></div>
+                        <div class="resource-hub-title">Reservation & Quotas</div>
+                        <div class="resource-hub-desc">Comprehensive breakdown of 2A, 2B, 3A, 3B, SC, ST, 15% Rural, 5%
+                            Kannada, and 371(J) HK quotas.</div>
+                        <div class="resource-hub-arrow">Check Quotas &rarr;</div>
+                    </a>
+
+                    <a href="eligibility.html" class="resource-hub-card">
+                        <div class="resource-hub-icon"><i class="fas fa-user-check"></i></div>
+                        <div class="resource-hub-title">Eligibility Clauses (A to O)</div>
+                        <div class="resource-hub-desc">7-year Karnataka study rules, mother-tongue criteria, defense
+                            personnel guidelines, and government clauses.</div>
+                        <div class="resource-hub-arrow">Verify Eligibility &rarr;</div>
+                    </a>
+
+                    <a href="exam.html" class="resource-hub-card">
+                        <div class="resource-hub-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="resource-hub-title">Exam Pattern & Syllabus</div>
+                        <div class="resource-hub-desc">Physics, Chemistry, Mathematics 180-mark structure, marking
+                            scheme, and 50:50 composite formulas.</div>
+                        <div class="resource-hub-arrow">Exam Details &rarr;</div>
+                    </a>
+
+                    <a href="registration.html" class="resource-hub-card">
+                        <div class="resource-hub-icon"><i class="fas fa-clipboard-check"></i></div>
+                        <div class="resource-hub-title">Application & Registration</div>
+                        <div class="resource-hub-desc">Step-by-step portal registration, SATS number entry, photo
+                            specifications, and fee payment instructions.</div>
+                        <div class="resource-hub-arrow">Registration Guide &rarr;</div>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -2719,7 +3025,9 @@
                             Mathematics out of 180) and 50% weightage to your Class 12 / 2nd PUC Board Examination marks
                             in Physics, Chemistry, and Mathematics (normalized out of 100%). The sum of both percentages
                             divided by 2 produces your Composite Score (out of 100%), which determines your KCET State
-                            Merit Rank.
+                            Merit Rank. You can simulate your admission prospects using our <a href="college-predictor.html"
+                                class="card-inline-link"><i class="fas fa-wand-magic-sparkles"></i> KCET College
+                                Predictor 2027 &rarr;</a>
                         </div>
                     </div>
 
@@ -2749,7 +3057,8 @@
                             Verification Slip provided during document verification. It acts as the master
                             authentication token to register on the KEA Option Entry web portal and create your personal
                             password. Never share your secret key with anyone, internet cafes, or educational
-                            consultants.
+                            consultants. Review requirements in our <a href="documents.html" class="card-inline-link"><i
+                                    class="fas fa-file-shield"></i> Document Verification Guide &rarr;</a>
                         </div>
                     </div>
 
@@ -2766,7 +3075,9 @@
                             yours.<br><br>
                             In <strong>Choice 3</strong>, you completely reject and forfeit the allotted seat without
                             paying fees, and enter Round 2 competing only with your remaining higher options. You cannot
-                            reclaim your Round 1 seat under Choice 3.
+                            reclaim your Round 1 seat under Choice 3. Learn more in our <a href="counselling.html"
+                                class="card-inline-link"><i class="fas fa-arrows-split-up-and-left"></i> Choice 1, 2, 3
+                                & 4 Counselling Guide &rarr;</a>
                         </div>
                     </div>
 
@@ -2781,7 +3092,9 @@
                             college in Karnataka with a <strong>100% tuition fee waiver</strong> (students pay only
                             ~₹4,500 in nominal university fees). There is no separate application for SNQ. If you submit
                             a valid Income Certificate during registration showing annual family income less than ₹8.00
-                            Lakhs, KEA automatically considers you for SNQ seats during option entry.
+                            Lakhs, KEA automatically considers you for SNQ seats during option entry. Details in our <a
+                                href="reservation.html" class="card-inline-link"><i class="fas fa-id-card-clip"></i>
+                                Reservation & SNQ Rules &rarr;</a>
                         </div>
                     </div>
 
