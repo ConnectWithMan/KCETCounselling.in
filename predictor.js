@@ -1218,7 +1218,7 @@ function renderCards(matchesToRender) {
                             <button type="button" class="${buttonClass}" data-choice-id="${m.choiceId}" onclick="toggleSaveChoiceById('${m.choiceId}', this)">
                                 ${buttonText}
                             </button>
-                            <a href="cutoff.html" class="detail-link" target="_blank">
+                            <a href="/cutoff" class="detail-link" target="_blank">
                                 View Cutoff Matrix <i class="fas fa-arrow-up-right-from-square"></i>
                             </a>
                         </div>

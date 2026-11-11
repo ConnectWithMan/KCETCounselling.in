@@ -6,26 +6,21 @@
 (function () {
     'use strict';
 
-    // 1. Determine environment & URL resolution
-    const isFileProtocol = window.location.protocol === 'file:';
-    const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const isHtmlExtension = window.location.pathname.endsWith('.html');
-    const useHtmlExt = isFileProtocol || isLocalHost || isHtmlExtension;
-
+    // 1. URL resolution (Clean URLs without .html)
     const urls = {
-        home: useHtmlExt ? 'index.html' : '/',
-        predictor: useHtmlExt ? 'college-predictor.html' : '/college-predictor',
-        cutoff: useHtmlExt ? 'cutoff.html' : '/cutoff',
-        exam: useHtmlExt ? 'exam.html' : '/exam',
-        counselling: useHtmlExt ? 'counselling.html' : '/counselling',
-        registration: useHtmlExt ? 'registration.html' : '/registration',
-        reservation: useHtmlExt ? 'reservation.html' : '/reservation',
-        eligibility: useHtmlExt ? 'eligibility.html' : '/eligibility',
-        documents: useHtmlExt ? 'documents.html' : '/documents',
-        about: useHtmlExt ? 'about.html' : '/about',
-        contact: useHtmlExt ? 'contact.html' : '/contact',
-        privacy: useHtmlExt ? 'privacy.html' : '/privacy',
-        terms: useHtmlExt ? 'terms.html' : '/terms'
+        home: '/',
+        predictor: '/college-predictor',
+        cutoff: '/cutoff',
+        exam: '/exam',
+        counselling: '/counselling',
+        registration: '/registration',
+        reservation: '/reservation',
+        eligibility: '/eligibility',
+        documents: '/documents',
+        about: '/about',
+        contact: '/contact',
+        privacy: '/privacy',
+        terms: '/terms'
     };
 
     // 2. Generate Common Navbar Markup
@@ -528,7 +523,7 @@
             const cleanCurrent = window.location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
             header.querySelectorAll('.nav-link, .dropdown-link, .nav-btn-predictor').forEach(link => {
                 const href = link.getAttribute('href') || '';
-                const cleanHref = href.replace(/^\//, '').replace(/\.html$/, '') || 'index';
+                const cleanHref = href.split('/').pop().replace(/\.html$/, '') || 'index';
                 if (cleanHref === cleanCurrent) {
                     link.classList.add('active');
                     link.setAttribute('aria-current', 'page');
